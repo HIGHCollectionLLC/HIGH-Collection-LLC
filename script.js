@@ -1,39 +1,519 @@
-const btn = document.getElementById("helloBtn");
-const msg = document.getElementById("message");
-const year = document.getElementById("year");
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-year.textContent = new Date().getFullYear();
+  <title>HIGH Collection LLC | Custom Apparel & Fan Gear</title>
 
-btn.addEventListener("click", () => {
-  msg.textContent = "Nice! Your JavaScript is working ✅";
-});
-// ===== World Cup 2026 Countdown (updates automatically) =====
-(function worldCupCountdown() {
-  // FIFA World Cup 2026 opening day (approx): June 11, 2026
-  // We’ll count down to 2026-06-11 at 00:00 local time.
-  const target = new Date(2026, 5, 11, 0, 0, 0); // month is 0-based: 5 = June
+  <!-- SEO description -->
+  <meta name="description" content="High Collection LLC offers premium custom apparel, cheer fan gear, and logo printing for individuals and businesses. Support your team in style.">
 
-  function update() {
+  <!-- Social media preview (WhatsApp, Facebook, iMessage) -->
+  <meta property="og:title" content="HIGH Collection LLC | Custom Apparel & Fan Gear">
+  <meta property="og:description" content="Premium custom apparel, cheer fan gear, and logo printing. Support your team in style.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://YOUR-LINK-HERE/images/logo.png">
+  <meta property="og:url" content="https://YOUR-LINK-HERE/">
+
+  <!-- Twitter / X preview -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HIGH Collection LLC | Custom Apparel & Fan Gear">
+  <meta name="twitter:description" content="Premium custom apparel, cheer fan gear, and logo printing. Support your team in style.">
+  <meta name="twitter:image" content="https://YOUR-LINK-HERE/images/logo.png">
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+
+  <!-- ✅ Snipcart (Cart + Checkout) -->
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
+  <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
+</head>
+<script>
+  window.SnipcartSettings = {
+    publicApiKey: "YOUR_SNIPCART_PUBLIC_API_KEY",
+    addProductBehavior: "none",
+    shipping: {
+      enabled: true
+    }
+  };
+</script>
+
+<body>
+  <!-- HEADER -->
+  <header class="site-header" id="home">
+    <div class="container header-wrap">
+      <div class="brand">
+        <img src="images/logo.png" alt="HIGH Collection LLC logo" class="site-logo" />
+        <div class="brand-text">
+          <h1 class="site-title">HIGH Collection LLC</h1>
+          <p class="tagline">Simple • Clean • Working</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#support">Support</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#shop">Shop</a>
+        <a href="#order">Order</a>
+
+        <!-- ✅ Cart icon -->
+        <button class="cart-btn snipcart-checkout" type="button" aria-label="Open cart">
+          <span class="cart-icon" aria-hidden="true">
+            <!-- simple cart svg -->
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 6h15l-2 9H8L6 6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M6 6 5 3H2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="9" cy="20" r="1.6" fill="currentColor"/>
+              <circle cx="18" cy="20" r="1.6" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="cart-text">Cart</span>
+          <span class="cart-count snipcart-items-count">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Hero">
+      <div class="container hero-wrap">
+        <div class="hero-text">
+          <h2 class="hero-title">Premium Custom Apparel & Printing</h2>
+          <p class="sub">
+            Personalized t-shirts, cheer fan gear, and custom logo printing for businesses and individuals.
+            Serving local customers and nationwide.
+          </p>
+
+          <div class="hero-buttons">
+            <!-- ✅ Send to Shop (so buying is easy) -->
+            <a class="btn primary" href="#shop">Shop Now</a>
+            <a class="btn" href="#gallery">View Gallery</a>
+          </div>
+
+          <div class="hero-ads">
+            <p><strong>Support your team</strong></p>
+            <p>EN: Support your team • FR: Soutenez votre équipe • Kreyòl: Sipòte ekip ou</p>
+          </div>
+        </div>
+
+        <div class="hero-brand">
+          <!-- ✅ Make hero logo less dominant: keep it smaller (CSS below) -->
+          <img src="images/logo.png" alt="High Collection LLC logo" class="brand-logo" />
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="section">
+      <div class="container">
+        <h2>Why High Collection</h2>
+
+        <div class="features">
+          <div class="card">
+            <h3>👕 Personalized T-Shirts</h3>
+            <p>Custom names, photos, slogans, and designs for individuals and teams.</p>
+          </div>
+
+          <div class="card">
+            <h3>⚽ Cheer Fan Equipment</h3>
+            <p>Fan shirts, signs, flags, and accessories to support your team.</p>
+          </div>
+
+          <div class="card">
+            <h3>⏳ World Cup 2026 Countdown</h3>
+            <p id="wc-countdown">Loading countdown…</p>
+            <p class="muted" style="margin-top:10px;">
+              <strong>English:</strong> Support your team •
+              <strong>Français:</strong> Soutenez votre équipe •
+              <strong>Kreyòl Ayisyen:</strong> Sipòte ekip ou
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUPPORT -->
+    <section id="support" class="section">
+      <div class="container">
+        <h2>Support Your Team</h2>
+        <p><strong>English:</strong> Support your team</p>
+        <p><strong>Français:</strong> Soutenez votre équipe</p>
+        <p><strong>Kreyòl Ayisyen:</strong> Sipòte ekip ou</p>
+      </div>
+    </section>
+
+    <!-- ✅ SHOP (NEW) -->
+    <section id="shop" class="section">
+      <div class="container">
+        <h2>Shop</h2>
+        <p class="hint">Pick your size and color, then add to cart. Checkout with card.</p>
+
+        <div class="shop-grid">
+          <!-- PRODUCT 1 -->
+          <article class="product-card">
+            <img src="images/shirt1.png" alt="Faith Over Fear Tee" class="product-img" />
+            <div class="product-body">
+              <h3 class="product-title">Faith Over Fear Tee</h3>
+              <p class="product-price">$30.00</p>
+
+              <div class="product-options">
+                <label for="p1-size">Size</label>
+                <select id="p1-size">
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL (+$3)</option>
+                  <option value="2XL">2XL (+$3)</option>
+                  <option value="3XL">3XL (+$6)</option>
+                </select>
+
+                <label for="p1-color">Color</label>
+                <select id="p1-color">
+                  <option value="Black">Black</option>
+                  <option value="White">White</option>
+                  <option value="Sand">Sand</option>
+                </select>
+              </div>
+
+              <button
+                class="btn primary snipcart-add-item add-to-cart"
+                data-size-select="p1-size"
+                data-color-select="p1-color"
+                data-item-id="faith-over-fear-tee"
+                data-item-name="Faith Over Fear Tee"
+                data-item-price="30.00"
+                data-item-url="/"
+                data-item-image="images/shirt1.png"
+                data-item-custom1-name="Size"
+                data-item-custom1-required="true"
+                data-item-custom2-name="Color"
+                data-item-custom2-required="true"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </article>
+
+          <!-- PRODUCT 2 -->
+          <article class="product-card">
+            <img src="images/shirt1.png" alt="God Did It Tee" class="product-img" />
+            <div class="product-body">
+              <h3 class="product-title">God Did It Tee</h3>
+              <p class="product-price">$30.00</p>
+
+              <div class="product-options">
+                <label for="p2-size">Size</label>
+                <select id="p2-size">
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL (+$3)">XL (+$3)</option>
+                  <option value="2XL (+$3)">2XL (+$3)</option>
+                  <option value="3XL (+$6)">3XL (+$6)</option>
+                </select>
+
+                <label for="p2-color">Color</label>
+                <select id="p2-color">
+                  <option value="Black">Black</option>
+                  <option value="White">White</option>
+                  <option value="Navy">Navy</option>
+                </select>
+              </div>
+
+<button
+  class="btn primary snipcart-add-item add-to-cart"
+  data-size-select="p2-size"
+  data-color-select="p2-color"
+  data-item-id="god-did-it-tee"
+  data-item-name="God Did It Tee"
+  data-item-price="30.00"
+  data-item-url="/"
+  data-item-image="images/shirt1.png"
+  data-item-custom1-name="Size"
+  data-item-custom1-required="true"
+  data-item-custom2-name="Color"
+  data-item-custom2-required="true"
+  data-item-custom3-name="Fulfillment"
+  data-item-custom3-options="Pickup (Free)|Shipping"
+  data-item-custom3-required="true"
+>
+  Add to Cart
+ </button>
+            </div>
+          </article>
+
+          <!-- PRODUCT 3 (Different price example) -->
+          <article class="product-card">
+            <img src="images/shirt1.png" alt="Custom Name Tee" class="product-img" />
+            <div class="product-body">
+              <h3 class="product-title">Custom Name Tee</h3>
+              <p class="product-price">$25.00</p>
+
+              <div class="product-options">
+                <label for="p3-size">Size</label>
+                <select id="p3-size">
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL (+$3)">XL (+$3)</option>
+                  <option value="2XL (+$3)">2XL (+$3)</option>
+                  <option value="3XL (+$6)">3XL (+$6)</option>
+                </select>
+
+                <label for="p3-color">Color</label>
+                <select id="p3-color">
+                  <option value="Black">Black</option>
+                  <option value="White">White</option>
+                  <option value="Gray">Gray</option>
+                </select>
+
+                <label for="p3-name">Name on shirt</label>
+                <input id="p3-name" type="text" placeholder="Type the name" />
+              </div>
+
+              <button
+                class="btn primary snipcart-add-item add-to-cart"
+                data-size-select="p3-size"
+                data-color-select="p3-color"
+                data-text-select="p3-name"
+                data-item-id="custom-name-tee"
+                data-item-name="Custom Name Tee"
+                data-item-price="25.00"
+                data-item-url="/"
+                data-item-image="images/shirt1.png"
+                data-item-custom1-name="Size"
+                data-item-custom1-required="true"
+                data-item-custom2-name="Color"
+                data-item-custom2-required="true"
+                data-item-custom3-name="Name"
+                data-item-custom3-required="true"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <p class="hint" style="margin-top:12px;">
+          To add more products: copy a product card, change the <strong>data-item-id</strong>, <strong>data-item-name</strong>, and <strong>data-item-price</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="section">
+      <div class="container">
+        <h2>Gallery</h2>
+        <p class="hint">Sample designs and product mockups by High Collection LLC.</p>
+
+        <div class="gallery">
+          <figure class="gitem">
+            <img src="images/shirt1.png" alt="Custom T-shirt design">
+            <figcaption>Custom T-shirt</figcaption>
+          </figure>
+
+          <figure class="gitem">
+            <img src="images/hat1.png" alt="Hat with logo">
+            <figcaption>Caps & Hats</figcaption>
+          </figure>
+
+          <figure class="gitem">
+            <img src="images/mug1.png" alt="Mug with logo">
+            <figcaption>Mugs & Glass</figcaption>
+          </figure>
+
+          <figure class="gitem">
+            <img src="images/phonecase1.png" alt="Phone case design">
+            <figcaption>Phone Cases</figcaption>
+          </figure>
+
+          <figure class="gitem">
+            <img src="images/sign1.png" alt="Fan sign design">
+            <figcaption>Fan Signs</figcaption>
+          </figure>
+
+          <figure class="gitem">
+            <img src="images/1.png" alt="Sample design 1">
+            <figcaption>Sample</figcaption>
+          </figure>
+          <figure class="gitem">
+            <img src="images/2.png" alt="Sample design 2">
+            <figcaption>Sample</figcaption>
+          </figure>
+          <figure class="gitem">
+            <img src="images/3.png" alt="Sample design 3">
+            <figcaption>Sample</figcaption>
+          </figure>
+          <figure class="gitem">
+            <img src="images/4.png" alt="Sample design 4">
+            <figcaption>Sample</figcaption>
+          </figure>
+          <figure class="gitem">
+            <img src="images/5.png" alt="Sample design 5">
+            <figcaption>Sample</figcaption>
+          </figure>
+          <figure class="gitem">
+            <img src="images/6.png" alt="Sample design 6">
+            <figcaption>Sample</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="section">
+      <div class="container card">
+        <h2>Services & Pricing</h2>
+
+        <h3>👕 Custom T-Shirts</h3>
+        <ul>
+          <li>S – M – L (simple design): <strong>$18 – $22</strong></li>
+          <li>S – M – L (logo or graphic): <strong>$25 – $35</strong></li>
+          <li>XL – 2XL: <strong>+$3</strong></li>
+          <li>3XL – 5XL: <strong>+$5 – $8</strong></li>
+        </ul>
+
+        <h3>⚽ Fan & Event Shirts</h3>
+        <ul>
+          <li>Haiti / Soccer / Event designs: <strong>$30 – $45</strong></li>
+        </ul>
+
+        <h3>🧢 Accessories</h3>
+        <ul>
+          <li>Caps / Hats: <strong>$18 – $40</strong></li>
+          <li>Mugs & Glasses: <strong>$12 – $20</strong></li>
+          <li>Water Bottles: <strong>$20 – $30</strong></li>
+          <li>Phone Cases: <strong>$15 – $30</strong></li>
+        </ul>
+
+        <h3>✍️ Custom Design Services</h3>
+        <ul>
+          <li>Text or name edit: <strong>Free – $5</strong></li>
+          <li>Logo setup: <strong>$10 – $20</strong></li>
+          <li>Full custom design: <strong>$40 – $80</strong></li>
+        </ul>
+
+        <p class="hint">Prices may vary depending on size, design complexity, and quantity.</p>
+      </div>
+    </section>
+
+    <!-- ORDER -->
+    <section id="order" class="section">
+      <div class="container card">
+        <h2>Order</h2>
+
+        <div class="order-buttons">
+          <a class="btn" href="https://wa.me/0000000000?text=Hello!%20I%20want%20to%20place%20an%20order." target="_blank" rel="noopener">
+            Order on WhatsApp
+          </a>
+
+          <a class="btn btn-outline"
+             href="https://mail.google.com/mail/?view=cm&fs=1&to=MYMAIL@OKAY.COM&su=Order%20Request%20-%20High%20Collection%20LLC"
+             target="_blank" rel="noopener">
+            Order by Email
+          </a>
+
+          <a class="btn btn-outline" href="tel:+10000000000840">
+            Call to Order
+          </a>
+
+          <a class="btn primary"
+             href="https://buy.stripe.com/5kQ3co15pagMd8ka8Z43S01"
+             target="_blank" rel="noopener">
+            Pay Online (Card • Apple Pay)
+          </a>
+        </div>
+
+        <p class="hint">Tell us what you want (size, color, design idea) and attach your logo/photo if needed.</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="container card">
+        <h2>Contact Us</h2>
+
+        <form class="form"
+              action="https://formspree.io/f/xreaeoqz"
+              method="POST">
+
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> HIGH Collection LLC</p>
+    </div>
+  </footer>
+
+  <!-- ✅ Snipcart container (REQUIRED) -->
+  <div hidden id="snipcart" data-api-key=" YmY2NjRkYWEtYjNkNC00YzkxLWFlYTQtMDQ1MmViODkyMTUyNjM5MDY1MzIxNjU1MDc2MDg3"></div>
+
+  <!-- SCRIPTS -->
+ <script>
+  // Footer year
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // World Cup 2026 countdown
+  (function worldCupCountdown() {
     const el = document.getElementById("wc-countdown");
     if (!el) return;
 
-    const now = new Date();
-    const diff = target.getTime() - now.getTime();
+    const target = new Date(2026, 5, 11, 0, 0, 0);
 
-    if (diff <= 0) {
-      el.textContent = "World Cup 2026 is here! ⚽🔥";
-      return;
+    function tick() {
+      const now = new Date();
+      const diff = target - now;
+
+      if (diff <= 0) {
+        el.textContent = "It’s World Cup time! 🏆";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((diff / (1000 * 60)) % 60);
+
+      el.textContent = `${days} days, ${hours} hours, ${mins} minutes remaining`;
     }
 
-    const totalSeconds = Math.floor(diff / 1000);
-    const days = Math.floor(totalSeconds / (3600 * 24));
-    const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    tick();
+    setInterval(tick, 60 * 1000);
+  })();
 
-    el.textContent = `${days} days, ${hours} hours, ${minutes} minutes remaining until World Cup 2026.`;
-  }
+  // ✅ This is the important new part
+  (function wireProductSelectors() {
+    const buttons = document.querySelectorAll(".add-to-cart.snipcart-add-item");
 
-  update();
-  // Update every minute (always current)
-  setInterval(update, 60 * 1000);
-})();
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const sizeId = btn.getAttribute("data-size-select");
+        const colorId = btn.getAttribute("data-color-select");
+
+        const sizeEl = sizeId ? document.getElementById(sizeId) : null;
+        const colorEl = colorId ? document.getElementById(colorId) : null;
+
+        if (sizeEl) btn.setAttribute("data-item-custom1-value", sizeEl.value);
+        if (colorEl) btn.setAttribute("data-item-custom2-value", colorEl.value);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
