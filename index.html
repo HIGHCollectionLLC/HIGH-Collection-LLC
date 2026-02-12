@@ -24,16 +24,27 @@
 
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
+
+  <!-- ✅ Snipcart (Cart + Checkout) -->
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
+  <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
 </head>
+<script>
+  window.SnipcartSettings = {
+    publicApiKey: "YOUR_SNIPCART_PUBLIC_API_KEY",
+    addProductBehavior: "none",
+    shipping: {
+      enabled: true
+    }
+  };
+</script>
 
 <body>
   <!-- HEADER -->
   <header class="site-header" id="home">
     <div class="container header-wrap">
       <div class="brand">
-        <!-- Logo (make sure your file exists at: images/logo.png) -->
         <img src="images/logo.png" alt="HIGH Collection LLC logo" class="site-logo" />
-
         <div class="brand-text">
           <h1 class="site-title">HIGH Collection LLC</h1>
           <p class="tagline">Simple • Clean • Working</p>
@@ -46,7 +57,23 @@
         <a href="#support">Support</a>
         <a href="#gallery">Gallery</a>
         <a href="#pricing">Pricing</a>
+        <a href="#shop">Shop</a>
         <a href="#order">Order</a>
+
+        <!-- ✅ Cart icon -->
+        <button class="cart-btn snipcart-checkout" type="button" aria-label="Open cart">
+          <span class="cart-icon" aria-hidden="true">
+            <!-- simple cart svg -->
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 6h15l-2 9H8L6 6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M6 6 5 3H2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="9" cy="20" r="1.6" fill="currentColor"/>
+              <circle cx="18" cy="20" r="1.6" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="cart-text">Cart</span>
+          <span class="cart-count snipcart-items-count">0</span>
+        </button>
       </nav>
     </div>
   </header>
@@ -65,7 +92,8 @@
           </p>
 
           <div class="hero-buttons">
-            <a class="btn primary" href="#order">Order Now</a>
+            <!-- ✅ Send to Shop (so buying is easy) -->
+            <a class="btn primary" href="#shop">Shop Now</a>
             <a class="btn" href="#gallery">View Gallery</a>
           </div>
 
@@ -76,7 +104,7 @@
         </div>
 
         <div class="hero-brand">
-          <!-- Optional: big logo in hero (same image) -->
+          <!-- ✅ Make hero logo less dominant: keep it smaller (CSS below) -->
           <img src="images/logo.png" alt="High Collection LLC logo" class="brand-logo" />
         </div>
       </div>
@@ -121,6 +149,164 @@
       </div>
     </section>
 
+    <!-- ✅ SHOP (NEW) -->
+    <section id="shop" class="section">
+      <div class="container">
+        <h2>Shop</h2>
+        <p class="hint">Pick your size and color, then add to cart. Checkout with card.</p>
+
+        <div class="shop-grid">
+          <!-- PRODUCT 1 -->
+          <article class="product-card">
+            <img src="images/shirt1.png" alt="Faith Over Fear Tee" class="product-img" />
+            <div class="product-body">
+              <h3 class="product-title">Faith Over Fear Tee</h3>
+              <p class="product-price">$30.00</p>
+
+              <div class="product-options">
+                <label for="p1-size">Size</label>
+                <select id="p1-size">
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL (+$3)</option>
+                  <option value="2XL">2XL (+$3)</option>
+                  <option value="3XL">3XL (+$6)</option>
+                </select>
+
+                <label for="p1-color">Color</label>
+                <select id="p1-color">
+                  <option value="Black">Black</option>
+                  <option value="White">White</option>
+                  <option value="Sand">Sand</option>
+                </select>
+              </div>
+
+              <button
+                class="btn primary snipcart-add-item add-to-cart"
+                data-size-select="p1-size"
+                data-color-select="p1-color"
+                data-item-id="faith-over-fear-tee"
+                data-item-name="Faith Over Fear Tee"
+                data-item-price="30.00"
+                data-item-url="/"
+                data-item-image="images/shirt1.png"
+                data-item-custom1-name="Size"
+                data-item-custom1-required="true"
+                data-item-custom2-name="Color"
+                data-item-custom2-required="true"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </article>
+
+          <!-- PRODUCT 2 -->
+          <article class="product-card">
+            <img src="images/shirt1.png" alt="God Did It Tee" class="product-img" />
+            <div class="product-body">
+              <h3 class="product-title">God Did It Tee</h3>
+              <p class="product-price">$30.00</p>
+
+              <div class="product-options">
+                <label for="p2-size">Size</label>
+                <select id="p2-size">
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL (+$3)">XL (+$3)</option>
+                  <option value="2XL (+$3)">2XL (+$3)</option>
+                  <option value="3XL (+$6)">3XL (+$6)</option>
+                </select>
+
+                <label for="p2-color">Color</label>
+                <select id="p2-color">
+                  <option value="Black">Black</option>
+                  <option value="White">White</option>
+                  <option value="Navy">Navy</option>
+                </select>
+              </div>
+
+<button
+  class="btn primary snipcart-add-item add-to-cart"
+  data-size-select="p2-size"
+  data-color-select="p2-color"
+  data-item-id="god-did-it-tee"
+  data-item-name="God Did It Tee"
+  data-item-price="30.00"
+  data-item-url="/"
+  data-item-image="images/shirt1.png"
+  data-item-custom1-name="Size"
+  data-item-custom1-required="true"
+  data-item-custom2-name="Color"
+  data-item-custom2-required="true"
+  data-item-custom3-name="Fulfillment"
+  data-item-custom3-options="Pickup (Free)|Shipping"
+  data-item-custom3-required="true"
+>
+  Add to Cart
+ </button>
+            </div>
+          </article>
+
+          <!-- PRODUCT 3 (Different price example) -->
+          <article class="product-card">
+            <img src="images/shirt1.png" alt="Custom Name Tee" class="product-img" />
+            <div class="product-body">
+              <h3 class="product-title">Custom Name Tee</h3>
+              <p class="product-price">$25.00</p>
+
+              <div class="product-options">
+                <label for="p3-size">Size</label>
+                <select id="p3-size">
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL (+$3)">XL (+$3)</option>
+                  <option value="2XL (+$3)">2XL (+$3)</option>
+                  <option value="3XL (+$6)">3XL (+$6)</option>
+                </select>
+
+                <label for="p3-color">Color</label>
+                <select id="p3-color">
+                  <option value="Black">Black</option>
+                  <option value="White">White</option>
+                  <option value="Gray">Gray</option>
+                </select>
+
+                <label for="p3-name">Name on shirt</label>
+                <input id="p3-name" type="text" placeholder="Type the name" />
+              </div>
+
+              <button
+                class="btn primary snipcart-add-item add-to-cart"
+                data-size-select="p3-size"
+                data-color-select="p3-color"
+                data-text-select="p3-name"
+                data-item-id="custom-name-tee"
+                data-item-name="Custom Name Tee"
+                data-item-price="25.00"
+                data-item-url="/"
+                data-item-image="images/shirt1.png"
+                data-item-custom1-name="Size"
+                data-item-custom1-required="true"
+                data-item-custom2-name="Color"
+                data-item-custom2-required="true"
+                data-item-custom3-name="Name"
+                data-item-custom3-required="true"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <p class="hint" style="margin-top:12px;">
+          To add more products: copy a product card, change the <strong>data-item-id</strong>, <strong>data-item-name</strong>, and <strong>data-item-price</strong>.
+        </p>
+      </div>
+    </section>
+
     <!-- GALLERY -->
     <section id="gallery" class="section">
       <div class="container">
@@ -153,7 +339,6 @@
             <figcaption>Fan Signs</figcaption>
           </figure>
 
-          <!-- Optional samples (only if these files exist) -->
           <figure class="gitem">
             <img src="images/1.png" alt="Sample design 1">
             <figcaption>Sample</figcaption>
@@ -225,54 +410,50 @@
         <h2>Order</h2>
 
         <div class="order-buttons">
-          <a class="btn" href="https://wa.me/19123802904?text=Hello!%20I%20want%20to%20place%20an%20order." target="_blank" rel="noopener">
+          <a class="btn" href="https://wa.me/0000000000?text=Hello!%20I%20want%20to%20place%20an%20order." target="_blank" rel="noopener">
             Order on WhatsApp
           </a>
 
-         <a class="btn btn-outline"
-   href="https://mail.google.com/mail/?view=cm&fs=1&to=print@highcollectionllc.com&su=Order%20Request%20-%20High%20Collection%20LLC"
-   target="_blank" rel="noopener">
-  Order by Email
-</a>
+          <a class="btn btn-outline"
+             href="https://mail.google.com/mail/?view=cm&fs=1&to=MYMAIL@OKAY.COM&su=Order%20Request%20-%20High%20Collection%20LLC"
+             target="_blank" rel="noopener">
+            Order by Email
+          </a>
 
-
-          <a class="btn btn-outline" href="tel:+19123802840">
+          <a class="btn btn-outline" href="tel:+10000000000840">
             Call to Order
           </a>
-          <a class="btn primary"
-   href="https://buy.stripe.com/5kQ3co15pagMd8ka8Z43S01"
-   target="_blank" rel="noopener">
-  Pay Online (Card · Apple Pay)
-</a>
 
+          <a class="btn primary"
+             href="https://buy.stripe.com/5kQ3co15pagMd8ka8Z43S01"
+             target="_blank" rel="noopener">
+            Pay Online (Card • Apple Pay)
+          </a>
         </div>
 
         <p class="hint">Tell us what you want (size, color, design idea) and attach your logo/photo if needed.</p>
       </div>
-  </section>
+    </section>
 
-<!-- CONTACT -->
-<section id="contact" class="section">
-  <div class="container card">
-    <h2>Contact Us</h2>
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="container card">
+        <h2>Contact Us</h2>
 
-    <form class="form"
-          action="https://formspree.io/f/xreaeoqz"
-          method="POST">
+        <form class="form"
+              action="https://formspree.io/f/xreaeoqz"
+              method="POST">
 
-      <input type="text" name="name" placeholder="Your Name" required>
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
 
-      <input type="email" name="email" placeholder="Your Email" required>
+        </form>
+      </div>
+    </section>
 
-      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-
-      <button type="submit">Send Message</button>
-
-    </form>
-  </div>
-</section>
-
-</main>
+  </main>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -281,44 +462,58 @@
     </div>
   </footer>
 
+  <!-- ✅ Snipcart container (REQUIRED) -->
+  <div hidden id="snipcart" data-api-key=" YmY2NjRkYWEtYjNkNC00YzkxLWFlYTQtMDQ1MmViODkyMTUyNjM5MDY1MzIxNjU1MDc2MDg3"></div>
+
   <!-- SCRIPTS -->
-  <script>
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
+ <script>
+  // Footer year
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-    // World Cup 2026 countdown (June 11, 2026)
-    (function worldCupCountdown() {
-      const el = document.getElementById("wc-countdown");
-      if (!el) return;
+  // World Cup 2026 countdown
+  (function worldCupCountdown() {
+    const el = document.getElementById("wc-countdown");
+    if (!el) return;
 
-      const target = new Date(2026, 5, 11, 0, 0, 0); // month is 0-based (5 = June)
+    const target = new Date(2026, 5, 11, 0, 0, 0);
 
-      function tick() {
-        const now = new Date();
-        const diff = target - now;
+    function tick() {
+      const now = new Date();
+      const diff = target - now;
 
-        if (diff <= 0) {
-          el.textContent = "It’s World Cup time! 🏆";
-          return;
-        }
-
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const mins = Math.floor((diff / (1000 * 60)) % 60);
-
-        el.textContent = `${days} days, ${hours} hours, ${mins} minutes remaining`;
+      if (diff <= 0) {
+        el.textContent = "It’s World Cup time! 🏆";
+        return;
       }
 
-      tick();
-      setInterval(tick, 60 * 1000);
-    })();
-  </script>
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((diff / (1000 * 60)) % 60);
+
+      el.textContent = `${days} days, ${hours} hours, ${mins} minutes remaining`;
+    }
+
+    tick();
+    setInterval(tick, 60 * 1000);
+  })();
+
+  // ✅ This is the important new part
+  (function wireProductSelectors() {
+    const buttons = document.querySelectorAll(".add-to-cart.snipcart-add-item");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const sizeId = btn.getAttribute("data-size-select");
+        const colorId = btn.getAttribute("data-color-select");
+
+        const sizeEl = sizeId ? document.getElementById(sizeId) : null;
+        const colorEl = colorId ? document.getElementById(colorId) : null;
+
+        if (sizeEl) btn.setAttribute("data-item-custom1-value", sizeEl.value);
+        if (colorEl) btn.setAttribute("data-item-custom2-value", colorEl.value);
+      });
+    });
+  })();
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
