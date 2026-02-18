@@ -54,7 +54,10 @@
     });
   })();
 </script>
+if (sizeEl) btn.setAttribute("data-item-custom1-value", sizeEl.value);
+if (colorEl) btn.setAttribute("data-item-custom2-value", colorEl.value);
 
 const textId = btn.getAttribute("data-text-select");
 const textEl = textId ? document.getElementById(textId) : null;
 if (textEl) btn.setAttribute("data-item-custom3-value", textEl.value.trim());
+
