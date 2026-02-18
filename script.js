@@ -54,3 +54,7 @@
     });
   })();
 </script>
+
+const textId = btn.getAttribute("data-text-select");
+const textEl = textId ? document.getElementById(textId) : null;
+if (textEl) btn.setAttribute("data-item-custom3-value", textEl.value.trim());
